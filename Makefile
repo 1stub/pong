@@ -4,7 +4,7 @@ LDFLAGS = -L/home/stub/repos/SFML/build/lib
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 
 # List your source files here
-SOURCES = main.cpp ball.cpp
+SOURCES = main.cpp ball.cpp paddle.cpp
 
 # Generate a list of object files from the source files
 OBJECTS = $(SOURCES:.cpp=.o)

@@ -1,11 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "ball.h"
+#include "paddle.h"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!", sf::Style::Close);
 
     Ball ball;
+    Paddle paddle;
 
     while (window.isOpen())
     {
@@ -18,6 +20,7 @@ int main()
 
         window.clear();
         ball.draw(window);
+        paddle.drawPaddles(window);
         window.display();
     }
 
