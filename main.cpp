@@ -20,6 +20,7 @@ int main()
 
         window.clear();
         ball.draw(window);
+        ball.moveBall();
         paddle.drawPaddles(window);
         window.display();
     }
