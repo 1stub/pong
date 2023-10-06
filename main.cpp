@@ -4,7 +4,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "pong", sf::Style::Close);
 
     Ball ball;
     Paddle paddle;

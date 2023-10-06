@@ -16,45 +16,31 @@ void Ball::draw(sf::RenderWindow &window){
 }
 
 void Ball::moveBall(){
-  if(ball.getPosition().x > 800){
-    if(velocity.y > 0){
-      velocity = sf::Vector2f(-0.1, 0.1);
+    sf::Vector2f currentPosition = ball.getPosition();
+    sf::Vector2f newVelocity;
+
+    if (currentPosition.x > 800) {
+      newVelocity.x = -0.1;
+      newVelocity.y = (velocity.y > 0) ? 0.1 : -0.1;
     }
-    else{ 
-      velocity = sf::Vector2f(-0.1, -0.1);
+    else if (currentPosition.x < 0) {
+      newVelocity.x = 0.1;
+      newVelocity.y = (velocity.y > 0) ? 0.1 : -0.1;
     }
-    ball.setPosition(ball.getPosition() + velocity);
-  }
-  if(ball.getPosition().x < 0){
-    if(velocity.y > 0){
-      velocity = sf::Vector2f(0.1, 0.1);
+    else if (currentPosition.y < 0) {
+      newVelocity.x = (velocity.x > 0) ? 0.1 : -0.1;
+      newVelocity.y = 0.1;
     }
-    else{ 
-      velocity = sf::Vector2f(0.1, -0.1);
+    else if (currentPosition.y > 600) {
+      newVelocity.x = (velocity.x > 0) ? 0.1 : -0.1;
+      newVelocity.y = -0.1;
     }
-    ball.setPosition(ball.getPosition() + velocity);
-  }
-  if(ball.getPosition().y < 0){
-    if(velocity.x > 0){
-      velocity = sf::Vector2f(0.1, 0.1);
+    else {
+      newVelocity = velocity;
     }
-    else{ 
-      velocity = sf::Vector2f(-0.1, 0.1);
-    }
-    ball.setPosition(ball.getPosition() + velocity);
-  }
-  if(ball.getPosition().y > 600){
-    if(velocity.x > 0){
-      velocity = sf::Vector2f(0.1, -0.1);
-    }
-    else{ 
-      velocity = sf::Vector2f(-0.1, -0.1);
-    }
-    ball.setPosition(ball.getPosition() + velocity);
-  }
-  else{
-    ball.setPosition(ball.getPosition() + velocity);
-  }
+
+    ball.setPosition(currentPosition + newVelocity);
+    velocity = newVelocity;
   /*
     sf::Vector2f objectPosition = objectSprite.getPosition();
     float x = objectPosition.x;
