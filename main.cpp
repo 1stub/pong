@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include "ball.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!", sf::Style::Close);
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!", sf::Style::Close);
+
+    Ball ball;
 
     while (window.isOpen())
     {
@@ -16,7 +17,7 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        ball.draw(window);
         window.display();
     }
 
