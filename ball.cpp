@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Rect.hpp>
 #include <iostream>
 #include "ball.h"
 
@@ -9,6 +10,8 @@ Ball::Ball(){
   float ballY = 300.f;
   sf::Vector2f pos = sf::Vector2f(ballX, ballY);
   ball.setPosition(pos);
+  
+  paddle = Paddle();
 }
 
 void Ball::draw(sf::RenderWindow &window){
@@ -35,6 +38,17 @@ void Ball::moveBall(){
       newVelocity.x = (velocity.x > 0) ? 4 : -4;
       newVelocity.y = -4;
     }
+    else if(l_collision){
+      newVelocity.x = 4;
+      newVelocity.y = (velocity.y > 0) ? 4 : -4;
+      l_collision = false;
+    }
+    else if(r_collision){
+      newVelocity.x = 4;
+      newVelocity.y = (velocity.y > 0) ? 4 : -4;
+      r_collision = false;
+    }
+
     else {
       newVelocity = velocity;
     }
@@ -48,4 +62,32 @@ void Ball::moveBall(){
     std::cout << "Object X: " << x << ", Y: " << y << std::endl;
    */
 }
+
+
+bool Ball::checkIntersection(const sf::FloatRect& ball, const sf::FloatRect& paddle){
+  return ball.left < paddle.left + paddle.width &&
+        ball.left + ball.width > paddle.left &&
+        ball.top < paddle.top + paddle.height &&
+        ball.top + ball.height > paddle.top;
+}
+
+void Ball::checkCollisions(){
+  sf::FloatRect ballBounds = ball.getGlobalBounds();
+  sf::FloatRect l_paddleBounds = paddle.l_paddleBounds();
+  sf::FloatRect r_paddleBounds = paddle.r_paddleBounds();
+  
+  if(checkIntersection(ballBounds, l_paddleBounds)){
+    this->velocity = sf::Vector2f(4,velocity.y);
+  }
+  if(checkIntersection(ballBounds, r_paddleBounds)){
+    this->velocity = sf::Vector2f(-4,velocity.y);
+  }
+}
+
+
+
+
+
+
+
 

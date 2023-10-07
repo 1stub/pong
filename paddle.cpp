@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include "paddle.h"
 
@@ -28,10 +29,17 @@ void Paddle::movePaddles(){
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
     l_paddle.setPosition(l_paddle.getPosition() + newVel);
   }
+}
 
+sf::FloatRect Paddle::l_paddleBounds() const{
+  return l_paddle.getGlobalBounds();
+} 
+
+sf::FloatRect Paddle::r_paddleBounds() const{
+  return r_paddle.getGlobalBounds(); 
 }
 
 void Paddle::drawPaddles(sf::RenderWindow &window){
   window.draw(l_paddle);
   window.draw(r_paddle);
-}     
+}   
