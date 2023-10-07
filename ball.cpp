@@ -20,20 +20,20 @@ void Ball::moveBall(){
     sf::Vector2f newVelocity;
 
     if (currentPosition.x > 800) {
-      newVelocity.x = -0.1;
-      newVelocity.y = (velocity.y > 0) ? 0.1 : -0.1;
+      newVelocity.x = -4;
+      newVelocity.y = (velocity.y > 0) ? 4 : -4;
     }
     else if (currentPosition.x < 0) {
-      newVelocity.x = 0.1;
-      newVelocity.y = (velocity.y > 0) ? 0.1 : -0.1;
+      newVelocity.x = 4;
+      newVelocity.y = (velocity.y > 0) ? 4 : -4;
     }
     else if (currentPosition.y < 0) {
-      newVelocity.x = (velocity.x > 0) ? 0.1 : -0.1;
-      newVelocity.y = 0.1;
+      newVelocity.x = (velocity.x > 0) ? 4 : -4;
+      newVelocity.y = 4;
     }
     else if (currentPosition.y > 600) {
-      newVelocity.x = (velocity.x > 0) ? 0.1 : -0.1;
-      newVelocity.y = -0.1;
+      newVelocity.x = (velocity.x > 0) ? 4 : -4;
+      newVelocity.y = -4;
     }
     else {
       newVelocity = velocity;

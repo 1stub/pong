@@ -5,10 +5,8 @@ class Paddle{
   public:
     Paddle();
     void drawPaddles(sf::RenderWindow &window);
-  
+    void movePaddles();
   private:
     sf::RectangleShape l_paddle;
     sf::RectangleShape r_paddle;
-    float xPos;
-    float yPos; 
 };

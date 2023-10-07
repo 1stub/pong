@@ -5,6 +5,8 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "pong", sf::Style::Close);
+    float frameLimit = 60.f;
+    window.setFramerateLimit(frameLimit);
 
     Ball ball;
     Paddle paddle;
@@ -22,6 +24,7 @@ int main()
         ball.draw(window);
         ball.moveBall();
         paddle.drawPaddles(window);
+        paddle.movePaddles();
         window.display();
     }
 

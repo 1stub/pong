@@ -8,5 +8,5 @@ class Ball{
     void moveBall();
   private:
     sf::CircleShape ball;
-    sf::Vector2f velocity = sf::Vector2f(0.1,0.1);
+    sf::Vector2f velocity = sf::Vector2f(4,4);
 };
