@@ -31,7 +31,6 @@ int main()
             ball.moveBall();
             paddle.movePaddles();
 
-            ball.checkCollisions();
             elapsedTime -= deltaTime;
         }
         window.clear();
