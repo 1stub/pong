@@ -2,6 +2,7 @@
 #define PADDLE_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 class Paddle{
   public:
@@ -10,9 +11,11 @@ class Paddle{
     void movePaddles();
     sf::FloatRect l_paddleBounds() const;
     sf::FloatRect r_paddleBounds() const;
+
   private:
     sf::RectangleShape l_paddle;
     sf::RectangleShape r_paddle;
+   
 };
 
 #endif

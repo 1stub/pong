@@ -10,10 +10,7 @@ int main()
 
     Ball ball;
     Paddle paddle;
-
-    sf::Clock clock;
-    float timeStep = 1.0f / frameLimit;
-
+    
     while (window.isOpen())
     {
         sf::Event event;
@@ -22,23 +19,12 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
-        float elapsedTime = clock.restart().asSeconds();
-
-        while (elapsedTime > 0)
-        {
-            float deltaTime = std::min(elapsedTime, timeStep);
-            ball.moveBall();
-            paddle.movePaddles();
-
-            elapsedTime -= deltaTime;
-        }
         window.clear();
         paddle.drawPaddles(window);
         ball.draw(window);
-
+        ball.moveBall(paddle);
+        paddle.movePaddles();
         window.display();
     }
-
     return 0;
 }
