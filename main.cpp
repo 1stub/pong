@@ -22,7 +22,7 @@ int main()
         window.clear();
         paddle.drawPaddles(window);
         ball.draw(window);
-        ball.moveBall(paddle);
+        ball.moveBall(paddle, window);
         paddle.movePaddles();
         window.display();
     }

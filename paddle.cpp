@@ -17,8 +17,6 @@ void Paddle::movePaddles(){
   sf::Vector2f l_paddlePos = l_paddle.getPosition();
   sf::Vector2f r_paddlePos = r_paddle.getPosition();
 
-  std::cout << l_paddle.getPosition().y << std::endl;
-
   float minY = 0;
   float maxY = 600;
   if(l_paddlePos.y < minY){

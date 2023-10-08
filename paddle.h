@@ -2,7 +2,6 @@
 #define PADDLE_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
 
 class Paddle{
   public:
@@ -15,8 +14,7 @@ class Paddle{
   private:
     sf::RectangleShape l_paddle;
     sf::RectangleShape r_paddle;
-    sf::Vector2f newVel = sf::Vector2f(0,4);
-   
+    sf::Vector2f newVel = sf::Vector2f(0,4);    
 };
 
 #endif
