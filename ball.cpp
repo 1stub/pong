@@ -18,19 +18,20 @@ void Ball::draw(sf::RenderWindow &window){
 void Ball::moveBall(Paddle paddle) {
     sf::Vector2f currentPosition = ball.getPosition();
     sf::Vector2f newVelocity = velocity;
+    sf::FloatRect ballBounds = ball.getGlobalBounds();
 
-    if (currentPosition.x > 800 || currentPosition.x < 0) {
+    if (ballBounds.left + ballBounds.width > 800 || ballBounds.left < 0) {
         newVelocity.x = -newVelocity.x;
     }
-    if (currentPosition.y < 0 || currentPosition.y > 600) {
+    if (ballBounds.top < 0 || ballBounds.top + ballBounds.height > 600) {
         newVelocity.y = -newVelocity.y;
     }
-    if (ball.getGlobalBounds().intersects(paddle.l_paddleBounds())) {
+    if (ballBounds.intersects(paddle.l_paddleBounds())) {
         newVelocity.x = std::abs(newVelocity.x);
         newVelocity.y = (newVelocity.y > 0) ? 4 : -4;
     }
 
-    if (ball.getGlobalBounds().intersects(paddle.r_paddleBounds())) {
+    if (ballBounds.intersects(paddle.r_paddleBounds())) {
         newVelocity.x = -std::abs(newVelocity.x);
         newVelocity.y = (newVelocity.y > 0) ? 4 : -4;
     }
