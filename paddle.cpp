@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Rect.hpp>
-#include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 #include "paddle.h"
 
 Paddle::Paddle(){
@@ -15,20 +14,39 @@ Paddle::Paddle(){
 }
 
 void Paddle::movePaddles(){
-  sf::Vector2f newVel = sf::Vector2f(0,4);
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-    r_paddle.setPosition(r_paddle.getPosition() - newVel);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
-    r_paddle.setPosition(r_paddle.getPosition() + newVel);
-  }
+  sf::Vector2f l_paddlePos = l_paddle.getPosition();
+  sf::Vector2f r_paddlePos = r_paddle.getPosition();
 
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-    l_paddle.setPosition(l_paddle.getPosition() - newVel);
+  std::cout << l_paddle.getPosition().y << std::endl;
+
+  float minY = 0;
+  float maxY = 600;
+  if(l_paddlePos.y < minY){
+    l_paddlePos.y = minY;  
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-    l_paddle.setPosition(l_paddle.getPosition() + newVel);
+  if (l_paddlePos.y + l_paddle.getGlobalBounds().height > maxY) {
+    l_paddlePos.y = maxY - l_paddle.getGlobalBounds().height;
   }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    l_paddlePos.y -= newVel.y;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    l_paddlePos.y += newVel.y;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    r_paddlePos.y -= newVel.y;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    r_paddlePos.y += newVel.y;
+  }
+  if (r_paddlePos.y < minY) {
+    r_paddlePos.y = minY;
+  }
+  if (r_paddlePos.y + r_paddle.getGlobalBounds().height > maxY) {
+    r_paddlePos.y = maxY - r_paddle.getGlobalBounds().height;
+  }
+  l_paddle.setPosition(l_paddlePos);
+  r_paddle.setPosition(r_paddlePos);
 }
 
 sf::FloatRect Paddle::l_paddleBounds() const{
