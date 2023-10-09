@@ -17,20 +17,37 @@ void Ball::draw(sf::RenderWindow &window){
   window.draw(ball);
 }
 
-void Ball::moveBall(Paddle paddle, sf::RenderWindow &window) {
+void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
+    double t = 1.0/60.0;
     sf::Vector2f newVelocity = velocity;
     sf::FloatRect ballBounds = ball.getGlobalBounds();
     bool reposition = false;
 
     if (ballBounds.left + ballBounds.width > 800) {
-          newVelocity.x = -newVelocity.x;
+      ball.setRadius(0.0);
+      if(freezeDuration > 0){
+        freezeDuration -= t;
+        if(freezeDuration <= 0){
           l_playerScore++;
           reposition = true;
+          newVelocity.x = -newVelocity.x;
+          freezeDuration = 1.0;
+          ball.setRadius(10.f);
+        }
+      }
     }
     if(ballBounds.left < 0){
-      newVelocity.x = -newVelocity.x;      
-      r_playerScore++;
-      reposition = true;
+      ball.setRadius(0.0);
+      if(freezeDuration > 0){
+        freezeDuration -= t;
+        if(freezeDuration <= 0){
+          r_playerScore++;
+          reposition = true;
+          newVelocity.x = -newVelocity.x;
+          freezeDuration = 1.0;
+          ball.setRadius(10.f);
+        }
+      }
     }
     if(reposition){
       ball.setPosition(sf::Vector2f(400,300));

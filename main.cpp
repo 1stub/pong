@@ -11,6 +11,9 @@ int main()
     Ball ball;
     Paddle paddle;
     
+    double t = 0.0;
+    double dt = 1.0/60.0;
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -19,10 +22,11 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        t+=dt;
         window.clear();
         paddle.drawPaddles(window);
         ball.draw(window);
-        ball.moveBall(paddle, window);
+        ball.moveBall(paddle, window, dt);
         paddle.movePaddles();
         window.display();
     }

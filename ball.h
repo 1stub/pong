@@ -9,7 +9,7 @@ class Ball{
   public:
     Ball();
     void draw(sf::RenderWindow &window);
-    void moveBall(Paddle paddle, sf::RenderWindow &window);
+    void moveBall(Paddle paddle, sf::RenderWindow &window, double &dt);
     sf::Vector2f l_paddlePos();
     sf::Vector2f r_paddlePos();
     bool checkIntersectionLeft(const sf::FloatRect& ball, const sf::FloatRect& paddle);
@@ -21,6 +21,9 @@ class Ball{
     bool r_collision = false;
     int l_playerScore = 0;
     int r_playerScore = 0;
+    bool delayFinished;
+    double freezeDuration = 1.0;
+    sf::Clock delayClock;
 };
 
 #endif
