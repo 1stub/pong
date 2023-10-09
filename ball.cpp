@@ -18,18 +18,23 @@ void Ball::draw(sf::RenderWindow &window){
 }
 
 void Ball::moveBall(Paddle paddle, sf::RenderWindow &window) {
-    sf::Vector2f currentPosition = ball.getPosition();
     sf::Vector2f newVelocity = velocity;
     sf::FloatRect ballBounds = ball.getGlobalBounds();
+    bool reposition = false;
 
     if (ballBounds.left + ballBounds.width > 800) {
-
-      newVelocity.x = -newVelocity.x;
-      l_playerScore++;
+          newVelocity.x = -newVelocity.x;
+          l_playerScore++;
+          reposition = true;
     }
     if(ballBounds.left < 0){
       newVelocity.x = -newVelocity.x;      
       r_playerScore++;
+      reposition = true;
+    }
+    if(reposition){
+      ball.setPosition(sf::Vector2f(400,300));
+      reposition = false;
     }
     if (ballBounds.top < 0 || ballBounds.top + ballBounds.height > 600) {
         newVelocity.y = -newVelocity.y;
@@ -43,7 +48,8 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window) {
         newVelocity.x = -std::abs(newVelocity.x);
         newVelocity.y = (newVelocity.y > 0) ? 4 : -4;
     }
-    ball.setPosition(currentPosition + newVelocity);
+
+    ball.setPosition(ball.getPosition() + newVelocity);
     velocity = newVelocity;
 
     sf::Font font;
@@ -52,16 +58,27 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window) {
       //error stuff
     }
 
+    // Move to do different function
     sf::Text l_score;
     l_score.setFont(font);
-    l_score.setCharacterSize(36);
+    l_score.setCharacterSize(64);
     l_score.setFillColor(sf::Color::White);
     l_score.setPosition(100.f, 100.f);
     std::stringstream ss;
     ss << l_playerScore;
     l_score.setString(ss.str());
 
+    sf::Text r_score;
+    r_score.setFont(font);
+    r_score.setCharacterSize(64);
+    r_score.setFillColor(sf::Color::White);
+    r_score.setPosition(660.f, 100.f);
+    std::stringstream sss;
+    sss << r_playerScore;
+    r_score.setString(sss.str());
+  
     window.draw(l_score);
+    window.draw(r_score);
 }
   /*
     sf::Vector2f objectPosition = objectSprite.getPosition();
