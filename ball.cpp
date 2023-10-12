@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/System/String.hpp>
 #include <iostream>
 #include <sstream>
 #include "ball.h"
@@ -24,19 +23,22 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
     bool reposition = false;
 
     if (ballBounds.left + ballBounds.width > 800) {
+      Paddle::paddleReset();
       ball.setRadius(0.0);
       if(freezeDuration > 0){
         freezeDuration -= t;
         if(freezeDuration <= 0){
-          l_playerScore++;
           reposition = true;
+          l_playerScore++;
           newVelocity.x = -newVelocity.x;
           freezeDuration = 1.0;
           ball.setRadius(10.f);
         }
       }
+      
     }
     if(ballBounds.left < 0){
+      Paddle::paddleReset();
       ball.setRadius(0.0);
       if(freezeDuration > 0){
         freezeDuration -= t;
@@ -59,11 +61,13 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
     if (ballBounds.intersects(paddle.l_paddleBounds())) {
         newVelocity.x = std::abs(newVelocity.x);
         newVelocity.y = (newVelocity.y > 0) ? 4 : -4;
+        newVelocity = sf::Vector2f(newVelocity.x * 1.1, newVelocity.y * 1.1);          
     }
 
     if (ballBounds.intersects(paddle.r_paddleBounds())) {
         newVelocity.x = -std::abs(newVelocity.x);
         newVelocity.y = (newVelocity.y > 0) ? 4 : -4;
+        newVelocity = sf::Vector2f(newVelocity.x * 1.1, newVelocity.y * 1.1);          
     }
 
     ball.setPosition(ball.getPosition() + newVelocity);

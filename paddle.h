@@ -8,6 +8,8 @@ class Paddle{
     Paddle();
     void drawPaddles(sf::RenderWindow &window);
     void movePaddles();
+    void setPaddles(sf::RectangleShape &leftPaddle, sf::RectangleShape &rightPaddle);
+    static void paddleReset();
     sf::FloatRect l_paddleBounds() const;
     sf::FloatRect r_paddleBounds() const;
 

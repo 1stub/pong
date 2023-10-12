@@ -2,6 +2,9 @@
 #include <iostream>
 #include "paddle.h"
 
+sf::RectangleShape* leftPaddleInstance = nullptr;
+sf::RectangleShape* rightPaddleInstance = nullptr;
+
 Paddle::Paddle(){
   l_paddle.setSize(sf::Vector2f(10,100));
   l_paddle.setFillColor(sf::Color::White);
@@ -11,6 +14,7 @@ Paddle::Paddle(){
   r_paddle.setFillColor(sf::Color::White);
   r_paddle.setPosition(sf::Vector2f(780, 250));
 
+  Paddle::setPaddles(l_paddle, r_paddle);
 }
 
 void Paddle::movePaddles(){
@@ -46,6 +50,16 @@ void Paddle::movePaddles(){
   l_paddle.setPosition(l_paddlePos);
   r_paddle.setPosition(r_paddlePos);
 }
+
+void Paddle::setPaddles(sf::RectangleShape &leftPaddle, sf::RectangleShape &rightPaddle){
+  leftPaddleInstance = &leftPaddle;
+  rightPaddleInstance = &rightPaddle;
+}
+
+void Paddle::paddleReset(){
+  leftPaddleInstance->setPosition(sf::Vector2f(10,250));
+  rightPaddleInstance->setPosition(sf::Vector2f(780,250));
+} 
 
 sf::FloatRect Paddle::l_paddleBounds() const{
   return l_paddle.getGlobalBounds();
