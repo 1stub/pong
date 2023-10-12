@@ -2,8 +2,9 @@
 pong clone written in c++ sfml
 
 TODO:
-- [ ] increase ball speed on return
+- [x] increase ball speed on return
 - [ ] main menu
 - [ ] add simple sounds
-- [ ] reset paddles after point scored
+- [x] reset paddles after point scored
 - [ ] (slightly)increase speed of paddles as they move
+- [ ] create variable for modifying ball speed

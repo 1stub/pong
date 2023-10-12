@@ -16,7 +16,7 @@ class Paddle{
   private:
     sf::RectangleShape l_paddle;
     sf::RectangleShape r_paddle;
-    sf::Vector2f newVel = sf::Vector2f(0,4);    
+    sf::Vector2f newVel = sf::Vector2f(0,5);    
 };
 
 #endif
