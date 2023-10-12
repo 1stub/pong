@@ -25,12 +25,12 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
     if (ballBounds.left + ballBounds.width > 800) {
       Paddle::paddleReset();
       ball.setRadius(0.0);
+      this->velocity = sf::Vector2f(4,4);
       if(freezeDuration > 0){
         freezeDuration -= t;
         if(freezeDuration <= 0){
           reposition = true;
           l_playerScore++;
-          newVelocity.x = -newVelocity.x;
           freezeDuration = 1.0;
           ball.setRadius(10.f);
         }
@@ -40,12 +40,12 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
     if(ballBounds.left < 0){
       Paddle::paddleReset();
       ball.setRadius(0.0);
+      this->velocity = sf::Vector2f(4,4);
       if(freezeDuration > 0){
         freezeDuration -= t;
         if(freezeDuration <= 0){
           r_playerScore++;
           reposition = true;
-          newVelocity.x = -newVelocity.x;
           freezeDuration = 1.0;
           ball.setRadius(10.f);
         }
