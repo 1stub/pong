@@ -24,10 +24,10 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        while(!menu.isPlay()){
-          menu.run_menu(window);
+        if(!menu.isPlay()){
+          menu.drawMenu(window);
         }
-        while(menu.isPlay()){
+        if(menu.isPlay()){
           t+=dt;
           window.clear();
           paddle.drawPaddles(window);

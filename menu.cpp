@@ -1,90 +1,60 @@
 #include "menu.h"
 
 Menu::Menu(){
-  window = new sf::RenderWindow();
-  font = new sf::Font();
-  
-  set_values();
+	if (!font.loadFromFile("/home/stub/repos/pong/fonts/Eight-Bit Madness.ttf"))
+	{
+		//Error handle
+	}
+	title.setFont(font);
+	title.setStyle(sf::Text::Bold);
+	title.setCharacterSize(40);
+	title.setFillColor(sf::Color::Blue);
+	title.setPosition(sf::Vector2f(width / 4, height / 16));
+	title.setString("Pong");
+
+	menu[0].setFont(font);
+	menu[0].setFillColor(sf::Color::Red);
+	menu[0].setString("Play");
+	menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_ITEMS + 1) * 1));
+
+	menu[1].setFont(font);
+	menu[1].setFillColor(sf::Color::White);
+	menu[1].setString("Exit");
+	menu[1].setPosition(sf::Vector2f(width / 2, height / (MAX_ITEMS + 1) * 3));
+
+	selectedItemIndex = 0;
 }
 
-Menu::~Menu(){
-  delete window;
-  delete font;
-
+Menu::~Menu()
+{
 }
 
-void Menu::set_values(){
-  pos = 0;
-  pressed = theselect = false;
-  font->loadFromFile("/home/stub/repos/pong/fonts/Eight-Bit Madness.ttf");
-
-  pos_mouse = {0,0};
-  mouse_coord = {0, 0};
-
-  options = {"Pong", "Play","Quit"};
-  texts.resize(3);
-  coords = {{590,40},{610,191},{623,457}};
-  sizes = {20,24,24};
-
-  for (std::size_t i{}; i < texts.size(); ++i){
-   texts[i].setFont(*font); 
-   texts[i].setString(options[i]); 
-   texts[i].setCharacterSize(sizes[i]);
-   texts[i].setOutlineColor(sf::Color::Black);
-   texts[i].setPosition(coords[i]);
-  }
-  texts[1].setOutlineThickness(4);
-  pos = 1;
+void Menu::drawMenu(sf::RenderWindow& window)
+{
+	window.draw(title);
+	for (int i = 0; i < MAX_ITEMS; i++) {
+		window.draw(menu[i]);
+	}
 }
 
-void Menu::loop_events(sf::RenderWindow &window){
-    pos_mouse = sf::Mouse::getPosition(window);
-    mouse_coord = window.mapPixelToCoords(pos_mouse);
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !pressed){
-      if( pos < 4){
-        ++pos;
-        pressed = true;
-        texts[pos].setOutlineThickness(4);
-        texts[pos - 1].setOutlineThickness(0);
-        pressed = false;
-        theselect = false;
-      }
-    }
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !pressed){
-      if( pos > 1){
-        --pos;
-        pressed = true;
-        texts[pos].setOutlineThickness(4);
-        texts[pos + 1].setOutlineThickness(0);
-        pressed = false;
-        theselect = false;
-      }
-    }
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !theselect){
-      theselect = true;
-      if( pos == 4){
-        window.close();
-      }
-      std::cout << options[pos] << '\n';
-    }
+void Menu::MoveUp()
+{
+	if (selectedItemIndex - 1 >= 0)
+	{
+		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		selectedItemIndex--;
+		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+	}
 }
 
-void Menu::draw_all(){
-  window->clear();
-  for(auto t : texts){
-   window->draw(t); 
-  }
-  window->display();
-}
-
-void Menu::run_menu(sf::RenderWindow &window){
-  while(window.isOpen()){
-    loop_events(window);
-    draw_all();
-  }
+void Menu::MoveDown()
+{
+	if (selectedItemIndex + 1 < MAX_ITEMS)
+	{
+		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		selectedItemIndex++;
+		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+	}
 }
 
 bool Menu::isPlay(){
