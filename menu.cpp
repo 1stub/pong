@@ -58,6 +58,10 @@ void Menu::MoveDown()
 	}
 }
 
+void Menu::playPressed(){
+  play = true;
+}
+
 bool Menu::isPlay(){
   return play;
 }

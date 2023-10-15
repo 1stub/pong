@@ -25,11 +25,36 @@ int main()
           if (event.type == sf::Event::Closed)
             window.close();
         }
-        if(!menu.isPlay()){
+        if (!menu.isPlay()) {
           window.clear();
           menu.drawMenu(window);
           window.display();
-        }
+
+          switch (event.type) {
+            case sf::Event::KeyReleased:
+              switch (event.key.code) {
+                case sf::Keyboard::Up:
+                    menu.MoveUp();
+                    break;
+
+                case sf::Keyboard::Down:
+                    menu.MoveDown();
+                    break;
+
+                case sf::Keyboard::Enter: 
+                    switch (menu.getSelectedItem()) {
+                        case 0:
+                            menu.playPressed();
+                            break;
+                        case 1:
+                            window.close();
+                            break;
+                    }
+                    break; 
+            }
+            break;
+    }
+}
         if(menu.isPlay()){
           t+=dt;
           window.clear();

@@ -13,6 +13,8 @@ class Menu {
     void MoveUp();
     void MoveDown();
     bool isPlay();
+    void playPressed();
+    int getSelectedItem(){return selectedItemIndex;};
 
   private:
     sf::Text menu[MAX_ITEMS];
