@@ -25,7 +25,6 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
     if (ballBounds.left + ballBounds.width > 800) {
       Paddle::paddleReset();
       ball.setRadius(0.0);
-      this->velocity = sf::Vector2f(4,4);
       if(freezeDuration > 0){
         freezeDuration -= t;
         if(freezeDuration <= 0){
@@ -33,14 +32,14 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
           l_playerScore++;
           freezeDuration = 1.0;
           ball.setRadius(10.f);
+          newVelocity = sf::Vector2f(4,4);
+          this->velocity = sf::Vector2f(4,4);
         }
       }
-      
     }
     if(ballBounds.left < 0){
       Paddle::paddleReset();
       ball.setRadius(0.0);
-      this->velocity = sf::Vector2f(4,4);
       if(freezeDuration > 0){
         freezeDuration -= t;
         if(freezeDuration <= 0){
@@ -48,6 +47,8 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
           reposition = true;
           freezeDuration = 1.0;
           ball.setRadius(10.f);
+          newVelocity = sf::Vector2f(4,4);
+          this->velocity = sf::Vector2f(4,4);
         }
       }
     }
