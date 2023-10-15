@@ -7,20 +7,22 @@ Menu::Menu(){
 	}
 	title.setFont(font);
 	title.setStyle(sf::Text::Bold);
-	title.setCharacterSize(40);
-	title.setFillColor(sf::Color::Blue);
-	title.setPosition(sf::Vector2f(width / 4, height / 16));
+	title.setCharacterSize(128);
+	title.setFillColor(sf::Color::White);
+	title.setPosition(sf::Vector2f(width / 2, height / 24));
 	title.setString("Pong");
 
 	menu[0].setFont(font);
-	menu[0].setFillColor(sf::Color::Red);
+	menu[0].setFillColor(sf::Color::White);
 	menu[0].setString("Play");
+  menu[0].setCharacterSize(64);
 	menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_ITEMS + 1) * 1));
 
 	menu[1].setFont(font);
 	menu[1].setFillColor(sf::Color::White);
+  menu[1].setCharacterSize(64);
 	menu[1].setString("Exit");
-	menu[1].setPosition(sf::Vector2f(width / 2, height / (MAX_ITEMS + 1) * 3));
+	menu[1].setPosition(sf::Vector2f(width / 2, height / (MAX_ITEMS + 1) * 2));
 
 	selectedItemIndex = 0;
 }
@@ -32,9 +34,8 @@ Menu::~Menu()
 void Menu::drawMenu(sf::RenderWindow& window)
 {
 	window.draw(title);
-	for (int i = 0; i < MAX_ITEMS; i++) {
-		window.draw(menu[i]);
-	}
+  window.draw(menu[0]);
+  window.draw(menu[1]);
 }
 
 void Menu::MoveUp()

@@ -7,4 +7,5 @@ TODO:
 - [ ] add simple sounds
 - [x] reset paddles after point scored
 - [ ] (slightly)increase speed of paddles as they move
+- [ ] Allow for menu items to be traversed
 - [ ] create variable for modifying ball speed

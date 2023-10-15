@@ -21,11 +21,14 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+          bool isPlay = false;
+          if (event.type == sf::Event::Closed)
+            window.close();
         }
         if(!menu.isPlay()){
+          window.clear();
           menu.drawMenu(window);
+          window.display();
         }
         if(menu.isPlay()){
           t+=dt;
