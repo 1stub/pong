@@ -2,7 +2,9 @@
 #define BALL_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <cwchar>
+#include <memory>
 #include "paddle.h"
 
 class Ball{
@@ -24,6 +26,9 @@ class Ball{
     bool delayFinished;
     double freezeDuration = 1.0;
     sf::Clock delayClock;
+    sf::SoundBuffer pongBoop;
+    std::shared_ptr<sf::Sound> ballBoop;
+    bool canPlaySound = true;
 };
 
 #endif

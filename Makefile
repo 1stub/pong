@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -I/home/stub/repos/SFML/include
 LDFLAGS = -L/home/stub/repos/SFML/build/lib
-LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # List your source files here
 SOURCES = main.cpp ball.cpp paddle.cpp menu.cpp

@@ -3,13 +3,18 @@
 #include <sstream>
 #include "ball.h"
 
-Ball::Ball(){
+Ball::Ball() : ballBoop(std::make_shared<sf::Sound>()){
   ball.setFillColor(sf::Color::White);
   ball.setRadius(10.f);
   float ballX = 400.f;
   float ballY = 300.f;
   sf::Vector2f pos = sf::Vector2f(ballX, ballY);
   ball.setPosition(pos);
+  if(!pongBoop.loadFromFile("/home/stub/repos/pong/sounds/pongblipf4.wav"))
+  {
+    //error
+  }
+  ballBoop->setBuffer(pongBoop);
 }
 
 void Ball::draw(sf::RenderWindow &window){
@@ -60,12 +65,14 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
         newVelocity.y = -newVelocity.y;
     }
     if (ballBounds.intersects(paddle.l_paddleBounds())) {
+        ballBoop->play();
         newVelocity.x = std::abs(newVelocity.x);
         newVelocity.y = (newVelocity.y > 0) ? 4 : -4;
         newVelocity = sf::Vector2f(newVelocity.x * 1.1, newVelocity.y * 1.1);          
     }
 
     if (ballBounds.intersects(paddle.r_paddleBounds())) {
+        ballBoop->play();
         newVelocity.x = -std::abs(newVelocity.x);
         newVelocity.y = (newVelocity.y > 0) ? 4 : -4;
         newVelocity = sf::Vector2f(newVelocity.x * 1.1, newVelocity.y * 1.1);          
