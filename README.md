@@ -6,7 +6,7 @@ What I would do differently: This was my first real game that I created in c++ s
 TODO:
 - [x] increase ball speed on return
 - [x] main menu
-- [ ] add simple sounds
+- [x] add simple sounds
 - [x] reset paddles after point scored
 - [ ] (slightly)increase speed of paddles as they move
 - [x] Allow for menu items to be traversed

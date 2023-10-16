@@ -27,6 +27,8 @@ class Ball{
     double freezeDuration = 1.0;
     sf::Clock delayClock;
     sf::SoundBuffer pongBoop;
+    sf::SoundBuffer bounceBoop;
+    std::shared_ptr<sf::Sound> bounce;
     std::shared_ptr<sf::Sound> ballBoop;
     bool canPlaySound = true;
 };

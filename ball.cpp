@@ -3,7 +3,7 @@
 #include <sstream>
 #include "ball.h"
 
-Ball::Ball() : ballBoop(std::make_shared<sf::Sound>()){
+Ball::Ball() : ballBoop(std::make_shared<sf::Sound>()), bounce(std::make_shared<sf::Sound>()){
   ball.setFillColor(sf::Color::White);
   ball.setRadius(10.f);
   float ballX = 400.f;
@@ -14,7 +14,11 @@ Ball::Ball() : ballBoop(std::make_shared<sf::Sound>()){
   {
     //error
   }
+  if(!bounceBoop.loadFromFile("/home/stub/repos/pong/sounds/pongblipg5.wav")){
+    //error
+  }
   ballBoop->setBuffer(pongBoop);
+  bounce->setBuffer(bounceBoop);
 }
 
 void Ball::draw(sf::RenderWindow &window){
@@ -62,7 +66,8 @@ void Ball::moveBall(Paddle paddle, sf::RenderWindow &window, double &dt) {
       reposition = false;
     }
     if (ballBounds.top < 0 || ballBounds.top + ballBounds.height > 600) {
-        newVelocity.y = -newVelocity.y;
+      bounce->play();  
+      newVelocity.y = -newVelocity.y;
     }
     if (ballBounds.intersects(paddle.l_paddleBounds())) {
         ballBoop->play();
